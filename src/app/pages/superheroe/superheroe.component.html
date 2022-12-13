@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="titulo">
+    <h1>Superhéroe</h1>
+</div>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Comic</th>
+            <th scope="col">Película</th>
+            <th scope="col">Descripción</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr>
+            <th>
+                <input type="text" class="form-control" required nombre="nombre" placeholder="Ingrese un nombre"
+                    [(ngModel)]="superheroe.nombre">
+            </th>
+            <th>
+                <input type="text" class="form-control" required pelicula="pelicula"
+                    placeholder="Ingrese el nombre de una película" [(ngModel)]="superheroe.pelicula">
+            </th>
+            <th>
+                <input type="text" class="form-control" required comic="comic"
+                    placeholder="Ingrese el nombre de un comic" [(ngModel)]="superheroe.comic">
+            </th>
+            <th>
+                <input type="text" class="form-control" required descripcion="descripcion"
+                    placeholder="Ingrese una descripción" [(ngModel)]="superheroe.descripcion">
+            </th>
+        </tr>
+    </tbody>
+    <div class="boton">
+        <button (click)="crearSuperheroe()" class="btn btn-dark">Crear</button>
+    </div>
+</table>
+<br>
+<app-superheroe-detalle [arraySuperheroes]="arrayHeroe"></app-superheroe-detalle>

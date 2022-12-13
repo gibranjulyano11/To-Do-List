@@ -1,0 +1,17 @@
+<app-navbar></app-navbar><br>
+<div class="text-center">
+    <h1 class="titulo"><img src="../../../assets/images/Marvel_Logo.svg.png" width="250" height="80" alt=""></h1>
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-4">
+    <div class="col mb-4" *ngFor="let comic of comics |async">
+        <div class="card h-100 bg-dark text-white text-center p-3">
+            <img src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" class="card-img-top" alt="{{comic.name}}">
+            <div class="card-body">
+                <h5 class="card-title">{{comic.title}}</h5>
+                <button (click)="getComics(comic.id)" class="btn btn-outline-primary btn-block">Más Detalles</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.container {
+    width: 100%;
+  }
+
+  .navbar{
+    width: auto;
+    height: 80px;
+  }
+
+  .navbar-inverse .nav li {
+    color: rgb(247, 247, 230);
+  }
+
+  .btn-a{
+    display: inline-block;
+    margin: 35px 0px;
+    padding: 0px 1px;
+    height: 35px;
+  }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "to-do": {
+    "Marvel-Avengers": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/to-do",
+            "outputPath": "dist/marvel-avengers",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "to-do:build:production"
+              "browserTarget": "Marvel-Avengers:build:production"
             },
             "development": {
-              "browserTarget": "to-do:build:development"
+              "browserTarget": "Marvel-Avengers:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "to-do:build"
+            "browserTarget": "Marvel-Avengers:build"
           }
         },
         "test": {
@@ -94,11 +94,21 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Marvel-Avengers:build:production",
+            "firebaseProject": "marvel-avengers-73dc9",
+            "firebaseHostingSite": "marvel-avengers-73dc9"
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "b2a0fff8-081b-4817-90c6-be9b42536643"
+    "analytics": "6ad9de29-4879-4674-a53f-ed420b96bc68"
   }
 }
