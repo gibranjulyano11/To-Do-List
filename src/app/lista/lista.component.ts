@@ -1,7 +1,8 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ILista } from '../ILista';
 import { TareaService } from '../services/tarea.service';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-lista',
@@ -9,18 +10,19 @@ import { TareaService } from '../services/tarea.service';
   styleUrls: ['./lista.component.css'],
 })
 export class ListaComponent implements OnInit {
-  listaItem: ILista = {
+  listadoItem: ILista = {
     id_author: 2,
     status: 0,
     description: '',
     finish_at: ''
   };
 
-  lista: ILista[] = [];
+  listas: ILista[] = [];
 
-  tareaCompleteda: number = 0;
+  tareasCompletadas: number = 0;
+  errorTarea: boolean = false;
 
-  constructor(private readonly tareaService: TareaService) {
+  constructor(private readonly tareaSvc: TareaService) {
 
     console.log()
 
@@ -28,31 +30,36 @@ export class ListaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getListado(true)
+    this.getListados(true)
 
   }
 
-  crear() {
-    this.listaItem.finish_at = new Date().toISOString();
-    this.tareaService.crearTodo(this.listaItem).subscribe((res: any) => {
-      if (res) {
-        this.getListado(true)
+  crear(forma: NgForm) {
+    this.listadoItem.finish_at = new Date().toISOString();
+    this.tareaSvc.crear(this.listadoItem).subscribe((res: any) => {
+      if (res.success) {
+        forma.reset()
+        this.getListados(true)
+      } else {
+        this.errorTarea = false
       }
     }, error => {
       console.log(error.message)
+      this.errorTarea = false
+
     })
   }
 
-  getListado(bandera: boolean) {
+  getListados(bandera: boolean) {
     if (bandera) {
-      this.tareaCompleteda = 0;
-      this.lista = []
-      this.tareaService.getListado().subscribe((res: any) => {
-        this.lista = [...res.data]
-        console.log(this.lista)
-        this.lista.forEach((todo) => {
+      this.tareasCompletadas = 0;
+      this.listas = []
+      this.tareaSvc.getListado().subscribe((res: any) => {
+        this.listas = [...res.data]
+        console.log(this.listas)
+        this.listas.forEach((todo) => {
           if (todo.status || todo.status === 1) {
-            this.tareaCompleteda++;
+            this.tareasCompletadas++;
           }
         })
       }, error => {

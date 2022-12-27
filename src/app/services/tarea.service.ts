@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ILista } from '../ILista';
 
-// const URL_API = environment.apiAutor;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +14,7 @@ export class TareaService {
     return this.http.get('https://bp-todolist.herokuapp.com/?id_author=2');
   }
 
-  crearTodo(listodo: ILista) {
+  crear(listodo: ILista) {
     let params = new HttpParams();
     params = params.append('id_author', listodo.id_author);
     return this.http.post('https://bp-todolist.herokuapp.com', listodo, {
@@ -24,11 +22,11 @@ export class TareaService {
     });
   }
 
-  updateTodo(listodo: ILista) {
+  actualizar(listodo: ILista) {
     return this.http.put(` https://bp-todolist.herokuapp.com/${listodo.id}`, listodo);
   }
 
-  deleteTodo(id: number) {
+  eliminar(id: number) {
     return this.http.delete(`https://bp-todolist.herokuapp.com/${id}`);
   }
 }

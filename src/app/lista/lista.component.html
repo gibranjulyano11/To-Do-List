@@ -1,20 +1,55 @@
 <div class="card">
-    <div class="card">
-        <h1>To-do List</h1>
-        <div class="input-group">
-            <span class="input-group-text">Nombre de la tarea:</span>
-            <input type="text" aria-label="tarea" class="form-control">
-            <button class="btn btn-success" type="button" id="button-addon2">Button</button>
-        </div>
-        <br>
-        <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" alt="">
-            </div>
-            <div></div>
-            <input type="text" class="form-control" aria-label="Text input with checkbox" value=""> 
-            <button class="btn btn-danger" type="button" id="button-addon2">Eliminar</button>
-        </div>
-    </div>
+    <div class="row content-todo">
 
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+            <h3 style="text-align: center;">To-Do</h3>
+
+            <form action="" #formTODO="ngForm" (ngSubmit)="crear(formTODO)">
+                <div class="input-group">
+                    <span class="input-group-text">Nombre de la tarea:</span>
+                    <input type="text" aria-label="tarea" class="form-control"
+                    [(ngModel)]="listadoItem.description" name="todoItem" #itemTodo="ngModel" required>
+                </div>
+
+                <div class="row">
+                    <div class="col col-xl-9 col-lg-9 col-md-9 col-sm-6 col-6">
+                        <div class="mb-3">
+                            <small class="text-errors" *ngIf="itemTodo.touched && itemTodo.errors?.['required']">
+                                Es necesario agregar una tarea
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="col col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6" style="text-align: end;">
+                        <button style="width: 100%;" type="submit" class="btn btn-success btn-xs"
+                            [disabled]="formTODO.invalid">+ Agregar</button>
+
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+        <ng-container *ngIf="listas.length > 0; else noTasks">
+
+            <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" *ngFor="let listadoItem of listas">
+                <app-lista-item [listadoItem]="listadoItem" (optionSucess)="getListados($event)"></app-lista-item>
+            </div>
+        </ng-container>
+
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-number-tasks">
+
+            {{tareasCompletadas}} de {{listas.length}} tarea(s) completadas
+
+        </div>
+
+    </div>
 </div>
+
+<ng-template #noTasks>
+    <p style="text-align: center; padding:10px">
+        La lista se encuentra vacía
+    </p>
+</ng-template>
